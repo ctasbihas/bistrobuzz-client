@@ -1,18 +1,47 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
-    const navItems = 
-    <>
-        <li><Link>Home</Link></li>
-        <li><Link>Contact Us</Link></li>
-        <li><Link>Dashboard</Link></li>
-        <li><Link>Our Menu</Link></li>
-        <li><Link>Our Shop</Link></li>
-        <li><Link>Sign Out</Link></li>
-    </>
-    
+    const [showNavbar, setShowNavbar] = useState(true);
+    const [prevScrollPos, setPrevScrollPos] = useState(0);
+    const [isTop, setIsTop] = useState(true);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollPos = window.pageYOffset;
+            setShowNavbar(
+                currentScrollPos < prevScrollPos ||
+                currentScrollPos === 0 ||
+                currentScrollPos < 50
+            );
+            setPrevScrollPos(currentScrollPos);
+            setIsTop(currentScrollPos === 0);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [prevScrollPos]);
+
+    const navItems =
+        <>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/menu">Our Menu</Link></li>
+            <li><Link>Our Shop</Link></li>
+            <li><Link>Contact Us</Link></li>
+            <li><Link>Dashboard</Link></li>
+            <li><Link>Sign Out</Link></li>
+        </>
+
     return (
-        <div className="navbar bg-[rgba(21,21,21,0.5)] fixed top-0 z-50 text-white">
+        <div
+            className={`
+            navbar z-50 text-white bg-[#15151580] sticky top-0 
+        ${showNavbar ? "" : "-translate-y-full"} transition-transform duration-300 
+        ${showNavbar ? "backdrop-filter backdrop-blur-lg" : ""}
+        ${isTop ? "bg-[#8B4513] transition bg-opacity-50" : "bg-transparent"}
+        `}>
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
