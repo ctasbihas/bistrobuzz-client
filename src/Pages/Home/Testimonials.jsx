@@ -9,7 +9,7 @@ import '@smastrom/react-rating/style.css'
 
 
 const Testimonials = () => {
-    const [reviews, setReviews] = useState(null);
+    const [reviews, setReviews] = useState([]);
     useEffect(() => {
         fetch("reviews.json")
             .then(res => res.json())
@@ -19,7 +19,7 @@ const Testimonials = () => {
         <section className="mb-20">
             <SectionTitle subHeading={"What Our Client Says"} heading={"Testimonials"} />
             <Swiper navigation={true} spaceBetween={20} modules={[Navigation]} className="lg:w-2/3"  >
-                {reviews?.map(review =>
+                {reviews.map(review =>
                     <SwiperSlide key={review._id} className="text-center px-20 flex flex-col items-center bg-base-200 rounded-xl py-10">
                         <Rating
                             style={{ width: 180, margin: "0 auto" }}

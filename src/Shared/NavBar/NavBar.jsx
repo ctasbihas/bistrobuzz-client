@@ -40,7 +40,6 @@ const NavBar = () => {
             navbar z-50 text-white bg-[#15151580] sticky top-0 
         ${showNavbar ? "" : "-translate-y-full"} transition-transform duration-300 
         ${showNavbar ? "backdrop-filter backdrop-blur-lg" : ""}
-        ${isTop ? "bg-[#8B4513] transition bg-opacity-50" : "bg-transparent"}
         `}>
             <div className="navbar-start">
                 <div className="dropdown">
