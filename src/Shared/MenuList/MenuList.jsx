@@ -17,7 +17,7 @@ const MenuList = ({ items, btnText }) => {
                     </div>
                 )}
             </div>
-            <Button color={"black"} text={btnText} />
+            <Button className="flex justify-center" color={"#1F2937"} text={btnText} />
         </>
     );
 };
