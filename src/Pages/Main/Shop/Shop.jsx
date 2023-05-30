@@ -1,10 +1,10 @@
 import { useState } from "react";
-import coverImg from "../../assets/shop/banner2.jpg"
-import Cover from "../../Shared/Cover/Cover";
+import coverImg from "../../../assets/shop/banner2.jpg"
+import Cover from "../../../Shared/Cover/Cover";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import FoodCard from "../../Shared/FoodCard/FoodCard";
-import { useMenu } from "../../hooks/useMenu";
+import FoodCard from "../../../Shared/FoodCard/FoodCard";
+import { useMenu } from "../../../hooks/useMenu";
 
 const Shop = () => {
     const tabTitles = ["Salads", "Pizzas", "Soups", "Desserts", "Drinks"];

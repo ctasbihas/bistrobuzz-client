@@ -1,13 +1,13 @@
 import { Helmet } from "react-helmet-async";
-import Cover from "../../Shared/Cover/Cover";
-import coverImage from '../../assets/menu/banner3.jpg';
+import Cover from "../../../Shared/Cover/Cover";
+import coverImage from '../../../assets/menu/banner3.jpg';
 import OffersMenu from "./OffersMenu";
-import { useMenu } from "../../hooks/useMenu";
-import MenuCategory from "../../Shared/MenuCategory/MenuCategory";
-import saladBg from "../../assets/menu/salad-bg.jpg"
-import dessertBg from "../../assets/menu/dessert-bg.jpeg"
-import pizzaBg from "../../assets/menu/pizza-bg.jpg"
-import soupBg from "../../assets/menu/soup-bg.jpg"
+import { useMenu } from "../../../hooks/useMenu";
+import MenuCategory from "../../../Shared/MenuCategory/MenuCategory";
+import saladBg from "../../../assets/menu/salad-bg.jpg"
+import dessertBg from "../../../assets/menu/dessert-bg.jpeg"
+import pizzaBg from "../../../assets/menu/pizza-bg.jpg"
+import soupBg from "../../../assets/menu/soup-bg.jpg"
 
 const Menu = () => {
     const menus = useMenu();

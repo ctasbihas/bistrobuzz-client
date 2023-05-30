@@ -1,6 +1,6 @@
-import Button from "../../components/Button/Button";
-import SectionTitle from "../../components/SectionTitle/SectionTitle";
-import featureImage from "../../assets/home/featured.jpg"
+import Button from "../../../components/Button/Button";
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import featureImage from "../../../assets/home/featured.jpg"
 
 const Featured = () => {
     return (

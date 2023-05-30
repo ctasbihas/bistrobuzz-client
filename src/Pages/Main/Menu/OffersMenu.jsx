@@ -1,6 +1,6 @@
-import MenuList from "../../Shared/MenuList/MenuList";
-import SectionTitle from "../../components/SectionTitle/SectionTitle";
-import { useMenu } from "../../hooks/useMenu";
+import MenuList from "../../../Shared/MenuList/MenuList";
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import { useMenu } from "../../../hooks/useMenu";
 
 const OffersMenu = () => {
     const menu = useMenu();
