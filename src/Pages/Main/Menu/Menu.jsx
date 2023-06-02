@@ -10,11 +10,11 @@ import pizzaBg from "../../../assets/menu/pizza-bg.jpg"
 import soupBg from "../../../assets/menu/soup-bg.jpg"
 
 const Menu = () => {
-    const menus = useMenu();
-    const saladMenu = menus.filter(menu => menu.category === "salad")
-    const dessertMenu = menus.filter(menu => menu.category === "dessert")
-    const pizzaMenu = menus.filter(menu => menu.category === "pizza")
-    const soupMenu = menus.filter(menu => menu.category === "soup")
+    const [menu] = useMenu();
+    const saladMenu = menu.filter(menu => menu.category === "salad")
+    const dessertMenu = menu.filter(menu => menu.category === "dessert")
+    const pizzaMenu = menu.filter(menu => menu.category === "pizza")
+    const soupMenu = menu.filter(menu => menu.category === "soup")
     return (
         <div>
             <Helmet><title>Bistro Boss Restaurant | Menu</title></Helmet>

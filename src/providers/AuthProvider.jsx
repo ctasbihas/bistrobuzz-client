@@ -1,12 +1,17 @@
 import { createContext, useEffect, useState } from "react";
 import { app } from "../firebase/firebase.config";
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { FacebookAuthProvider, GoogleAuthProvider, TwitterAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const facebookProvider = new FacebookAuthProvider();
+    const googleProvider = new GoogleAuthProvider();
+    const twitterProvider = new TwitterAuthProvider();
+
     const register = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
@@ -25,10 +30,34 @@ const AuthProvider = ({ children }) => {
         });
     }
 
+    const facebookSignIn = () => {
+        setLoading(true);
+        return signInWithPopup(auth, facebookProvider)
+    }
+    const googleSignIn = () => {
+        setLoading(true);
+        return signInWithPopup(auth, googleProvider)
+    }
+    const twitterSignIn = () => {
+        setLoading(true);
+        return signInWithPopup(auth, twitterProvider)
+    }
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, loggedUser => {
             setUser(loggedUser);
-            setLoading(false);
+
+            // Axios
+            if (loggedUser) {
+                axios.post("http://localhost:5000/jwt", { email: loggedUser.email })
+                    .then((data) => {
+                        localStorage.setItem('access-token', data.data.token);
+                        setLoading(false);
+                    })
+            }
+            else {
+                localStorage.removeItem('access-token')
+            }
         })
         return () => {
             return unsubscribe();
@@ -40,6 +69,9 @@ const AuthProvider = ({ children }) => {
         register,
         login,
         updateUserProfile,
+        facebookSignIn,
+        googleSignIn,
+        twitterSignIn,
         logout
     }
     return (

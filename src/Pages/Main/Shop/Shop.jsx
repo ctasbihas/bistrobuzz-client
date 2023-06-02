@@ -9,7 +9,7 @@ import { useMenu } from "../../../hooks/useMenu";
 const Shop = () => {
     const tabTitles = ["Salads", "Pizzas", "Soups", "Desserts", "Drinks"];
     const [activeTabIndex, setActiveTabIndex] = useState(0);
-    const menu = useMenu();
+    const [menu] = useMenu();
 
     const handleTabSelect = (index) => {
         setActiveTabIndex(index);

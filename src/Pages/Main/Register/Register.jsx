@@ -1,13 +1,14 @@
 import loginImg from '../../../assets/others/authentication2.png';
 import bgImg from '../../../assets/others/authentication.png';
-import { useContext } from 'react';
-import { AuthContext } from '../../../providers/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet-async';
+import { toast } from 'react-hot-toast';
+import SocialLogin from '../../../Shared/SocialLogin/SocialLogin';
+import { useAuth } from '../../../hooks/useAuth';
 
 const Register = () => {
-    const { register: signUp, updateUserProfile } = useContext(AuthContext);
+    const { register: signUp, updateUserProfile } = useAuth();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const navigate = useNavigate();
     const location = useLocation();
@@ -17,11 +18,26 @@ const Register = () => {
         const { name, photo, email, password } = data;
         signUp(email, password)
             .then(result => {
-                console.log(result.user);
                 updateUserProfile(name, photo)
-                    .then(() => navigate(from, {replace: true}))
+                    .then(() => {
+                        const user = { name, email, role: "user" };
+                        fetch("http://localhost:5000/users", {
+                            method: "POST",
+                            headers: {
+                                "content-type": "application/json"
+                            },
+                            body: JSON.stringify(user)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    toast.success("You have successfully registered.");
+                                    reset();
+                                    navigate(from, { replace: true });
+                                }
+                            })
+                    })
                     .catch(err => console.log(err))
-                reset()
             })
     };
     return (
@@ -91,9 +107,10 @@ const Register = () => {
                             <input type='submit' className="btn btn-primary" value="Register" />
                         </div>
                     </form>
-                    <label className="text-center">
-                        <span>Already Registered? <Link to="/login">Go To Login</Link></span>
+                    <label className="text-center text-[#D1A054] font-semibold">
+                        <span>Already Registered? <Link to="/login" className="font-bold" >Go To Login</Link></span>
                     </label>
+                    <SocialLogin/>
                 </div>
             </div>
         </div>

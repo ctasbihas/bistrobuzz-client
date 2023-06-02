@@ -3,7 +3,7 @@ import { useMenu } from "../../../hooks/useMenu";
 import MenuList from "../../../Shared/MenuList/MenuList";
 
 const PopularMenu = () => {
-    const menu = useMenu();
+    const [menu] = useMenu();
     const popularMenu = menu.filter(item => item.category === "popular");
     return (
         <section className="mb-20">

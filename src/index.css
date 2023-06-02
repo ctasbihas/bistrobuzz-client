@@ -11,3 +11,9 @@
     color: white;
     background-color: transparent;
 }
+.drawer-items a:active{
+    background-color: transparent;
+}
+.drawer-items a > svg:nth-child(1) {
+    font-size: 28px;
+}

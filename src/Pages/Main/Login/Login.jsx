@@ -1,13 +1,16 @@
 import loginImg from '../../../assets/others/authentication2.png';
 import bgImg from '../../../assets/others/authentication.png';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
-import { useContext, useEffect, useRef, useState } from 'react';
-import { AuthContext } from '../../../providers/AuthProvider';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import SocialLogin from '../../../Shared/SocialLogin/SocialLogin';
+import { toast } from 'react-hot-toast';
+import Swal from 'sweetalert2';
+import { useAuth } from '../../../hooks/useAuth';
 
 const Login = () => {
-    const { login } = useContext(AuthContext)
+    const { login } = useAuth()
     const captchaRef = useRef(null);
     const [error, setError] = useState("");
     const [disabled, setDisabled] = useState(true);
@@ -25,15 +28,30 @@ const Login = () => {
         const password = form.password.value;
         login(email, password)
             .then(result => {
-                navigate(from, { replace: true })
-                setError("")
+                setError("");
+                navigate(from, { replace: true });
+                toast.success("Login Successful.", {
+                    duration: 4000
+                });
             })
             .catch(err => {
                 setError(err.code)
                 if (err.code.split("/")[1] === "user-not-found") {
-                    alert("user not found")
+                    Swal.fire({
+                        title: 'User Not Found\nInvalid Email Address',
+                        text: "Want to create an account",
+                        icon: 'error',
+                        showCancelButton: true,
+                        confirmButtonColor: 'green',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes',
+                        cancelButtonText: "No"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            navigate("/register");
+                        }
+                    })
                 }
-                console.log(err.code);
             })
     }
     const handleCaptchaVerify = () => {
@@ -58,14 +76,16 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" name='email' placeholder="email" className="input input-bordered" />
+                            <input type="email" name='email' placeholder="email"
+                                className={`input input-bordered ${error.split("/")[1] === "user-not-found" ? "input-error" : ""}`}
+                            />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
                             <input type="password" name='password' placeholder="password" className={`input input-bordered ${error.split("/")[1] === "wrong-password" ? "input-error" : ""}`} />
-                            {error.split("/")[1] === "wrong-password" && <p className="text-red-500 ml-4">Invalid Password!</p>}
+                            {error.split("/")[1] === "wrong-password" && <p className="text-red-500 ml-4">Wrong Password!</p>}
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -80,9 +100,10 @@ const Login = () => {
                             <input disabled={disabled} type='submit' className="btn btn-primary" value="Login" />
                         </div>
                     </form>
-                    <label className="text-center">
-                        <span>New Here? <Link to="/register">Create An Account</Link></span>
+                    <label className="text-center text-[#D1A054] font-semibold">
+                        <span>New Here? <Link to="/register" className='font-bold' >Create An Account</Link></span>
                     </label>
+                    <SocialLogin />
                 </div>
             </div>
         </div>
