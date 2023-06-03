@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { BookingIcon, CalenderIcon, CartIcon, ReviewIcon, WalletIcon } from "../../assets/icons/icons";
 import {ImSpoonKnife} from "react-icons/im";
-import {TfiMenuAlt, TfiMenu} from "react-icons/tfi";
+import {TfiMenuAlt, TfiMenu, TfiCommentAlt} from "react-icons/tfi";
+import {BsBookmarksFill} from "react-icons/bs"
 import {AiFillHome, AiFillShopping} from "react-icons/ai";
 import {MdEmail} from "react-icons/md";
 import useCart from "../../hooks/useCart";
-import { FaBook, FaUsers } from "react-icons/fa";
+import { FaBook, FaCalendarAlt, FaShoppingCart, FaUsers, FaWallet } from "react-icons/fa";
 import { useAdmin } from "../../hooks/useAdmin";
 
 const SideBar = () => {
@@ -32,17 +32,17 @@ const SideBar = () => {
                         :
                         <>
                             <li><NavLink to="./"><AiFillHome /> User Home</NavLink></li>
-                            <li><NavLink to="./reservation"><CalenderIcon /> Reservation</NavLink></li>
-                            <li><NavLink to="./history"><WalletIcon /> Payment History</NavLink></li>
+                            <li><NavLink to="./payment"><FaCalendarAlt /> Reservation</NavLink></li>
+                            <li><NavLink to="./history"><FaWallet /> Payment History</NavLink></li>
                             <li>
                                 <NavLink to="./mycart" activeClassName="active-link">
-                                    <CartIcon />
+                                    <FaShoppingCart />
                                     My Cart
                                     <span className="badge badge-secondary">{cart.length}</span>
                                 </NavLink>
                             </li>
-                            <li><NavLink to="./review"><ReviewIcon /> Add Review</NavLink></li>
-                            <li><NavLink to="./booking"><BookingIcon /> My Booking</NavLink></li>
+                            <li><NavLink to="./review"><TfiCommentAlt /> Add Review</NavLink></li>
+                            <li><NavLink to="./booking"><BsBookmarksFill /> My Booking</NavLink></li>
                         </>}
 
                     <div className="divider"></div>
