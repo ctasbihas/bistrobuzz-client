@@ -23,6 +23,26 @@ const Checkout = ({ cart, price }) => {
         }
     }, [price, axiosSecure]);
 
+    function formatDate(date) {
+        const monthNames = [
+          "January", "February", "March", "April",
+          "May", "June", "July", "August",
+          "September", "October", "November", "December"
+        ];
+        
+        const dayNames = [
+          "Sunday", "Monday", "Tuesday", "Wednesday",
+          "Thursday", "Friday", "Saturday"
+        ];
+        
+        const dayOfWeek = dayNames[date.getUTCDay()];
+        const month = monthNames[date.getUTCMonth()];
+        const day = date.getUTCDate();
+        const year = date.getUTCFullYear();
+        
+        return `${dayOfWeek}, ${month} ${day}, ${year}`;
+      }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!stripe || !elements) {
@@ -71,7 +91,7 @@ const Checkout = ({ cart, price }) => {
                 email: user?.email,
                 transactionId: paymentIntent.id,
                 price,
-                date: new Date(),
+                date: formatDate(new Date()),
                 quantity: cart.length,
                 cartItems: cart.map(item => item._id),
                 menuItems: cart.map(item => item.orderFoodId),
@@ -81,7 +101,6 @@ const Checkout = ({ cart, price }) => {
             axiosSecure.post('/payments', payment)
                 .then((res) => {
                     if (res.data.insertResult.insertedId) {
-                        console.log(res.data);
                         Swal.fire({
                             title: 'Payment successful',
                             text: "Your transaction ID: " + paymentIntent.id,

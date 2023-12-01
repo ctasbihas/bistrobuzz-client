@@ -1,20 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
 
-
-::-webkit-scrollbar{
-    display: none;
+::-webkit-scrollbar {
+	display: none;
 }
 
-.drawer-items a.active{
-    color: white;
-    background-color: transparent;
-    font-weight: bold;
+.drawer-items a.active {
+	color: white;
+	background-color: transparent;
+	font-weight: bold;
 }
-.drawer-items a:active{
-    background-color: transparent;
+.drawer-items a:active {
+	background-color: transparent;
+}
+.nav-items a.active {
+	color: yellow;
+	background-color: transparent;
+}
+.nav-items a:active {
+	background-color: transparent;
 }
 .drawer-items a > svg:nth-child(1) {
-    font-size: 28px;
+	font-size: 28px;
+}
+.font-cinzel {
+	font-family: "Cinzel", sans-serif;
 }

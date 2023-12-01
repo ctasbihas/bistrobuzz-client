@@ -3,29 +3,18 @@ import { useAxiosSecure } from "./useAxiosSecure";
 import { useAuth } from "./useAuth";
 
 const useCart = () => {
-    const { user, loading } = useAuth();
-    const [axiosSecure] = useAxiosSecure();
-    const { refetch, data: cart = [] } = useQuery({
-        queryKey: ['carts', user?.email],
-        enabled: !loading,
-        queryFn: async () => {
-            const res = await axiosSecure(`/carts?email=${user?.email}`);
-            return res.data;
-        }
-    })
+	const { user, loading } = useAuth();
+	const [axiosSecure] = useAxiosSecure();
+	const { refetch, data: cart = [] } = useQuery({
+		queryKey: ["carts", user?.email],
+		enabled: !loading,
+		queryFn: async () => {
+			const res = await axiosSecure(`/carts?email=${user?.email}`);
+			return res.data;
+		},
+	});
 
-    return [cart, refetch]
+	return [cart, refetch];
 };
 
 export default useCart;
-
-/* Old style
-queryFn: async() => {
-    const res = await fetch(`http://localhost:5000/carts?email=${user?.email}`, {
-        headers: {
-            authorization: `Bearer ${localStorage.getItem("access-token")}`
-        }
-    });
-    return res.json();
-}
-*/

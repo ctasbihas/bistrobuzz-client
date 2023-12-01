@@ -42,7 +42,7 @@ const AddItem = () => {
 
     return (
         <section className="bg-white">
-            <Helmet><title>Bistro Boss Restaurant | Add Item</title></Helmet>
+            <Helmet><title>Bistro Buzz Restaurant | Add Item</title></Helmet>
             <SectionTitle subHeading={"What's New?"} heading={"Add An Item"} />
             <form onSubmit={handleSubmit(onSubmit)} className="bg-[#F3F3F3] p-5 rounded-lg space-y-5">
                 <div className="form-control w-full">
