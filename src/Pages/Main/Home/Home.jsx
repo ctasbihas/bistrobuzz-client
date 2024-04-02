@@ -5,6 +5,7 @@ import Category from "./Category";
 import Featured from "./Featured";
 import PopularMenu from "./PopularMenu";
 import Testimonials from "./Testimonials";
+import Call from "./Call";
 
 const Home = () => {
     return (
@@ -16,6 +17,7 @@ const Home = () => {
             <Category />
             <AboutBB />
             <PopularMenu />
+            <Call />
             <Featured />
             <Testimonials />
         </div>
