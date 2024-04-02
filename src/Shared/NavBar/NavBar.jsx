@@ -9,7 +9,6 @@ const NavBar = () => {
     const { user, logout } = useAuth();
     const [showNavbar, setShowNavbar] = useState(true);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
-    const [isTop, setIsTop] = useState(true);
     const [cart] = useCart();
 
     useEffect(() => {
@@ -21,7 +20,6 @@ const NavBar = () => {
                     currentScrollPos < 50
             );
             setPrevScrollPos(currentScrollPos);
-            setIsTop(currentScrollPos === 0);
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -77,13 +75,12 @@ const NavBar = () => {
 
     return (
         <div
-            className={`
-            navbar z-50 text-white bg-[#15151580] sticky top-0
+            className={`flex items-center w-full lg:w-[calc(100%-12px*2)] lg:mx-3 z-50 text-white bg-[#15151580] transition duration-300 py-2 lg:px-5 fixed rounded-full
         ${
-            showNavbar ? "" : "-translate-y-full"
-        } transition-transform duration-300 
-        ${showNavbar ? "backdrop-filter backdrop-blur-lg" : ""}
-        ${isTop ? "bg-[#E85A50]" : "bg-[#15151580]"}
+            showNavbar
+                ? "backdrop-filter backdrop-blur-lg top-3"
+                : "-translate-y-full"
+        }
         `}
         >
             <div className="navbar-start">
