@@ -1,5 +1,6 @@
 import Cover from "../../../Shared/Cover/Cover";
 import coverImg from "../../../assets/contact/banner.jpg";
+import Location from "./Location";
 
 const ContactUs = () => {
     return (
@@ -11,6 +12,7 @@ const ContactUs = () => {
                     "We are open for any suggestion or just to have a chat"
                 }
             />
+            <Location />
         </main>
     );
 };
