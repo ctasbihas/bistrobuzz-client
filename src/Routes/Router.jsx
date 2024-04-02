@@ -15,88 +15,89 @@ import Register from "../Pages/Main/Register/Register";
 import Shop from "../Pages/Main/Shop/Shop";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
+import ContactUs from "../Pages/Main/ContactUs/ContactUs";
 
 export const router = createBrowserRouter([
-	{
-		path: "/",
-		element: <Layout />,
-		children: [
-			{
-				path: "/",
-				element: <Home />,
-			},
-			{
-				path: "/menu",
-				element: <Menu />,
-			},
-			{
-				path: "/shop",
-				element: <Shop />,
-			},
-			{
-				path: "/contact",
-				element: <h1>Hello!</h1>,
-			},
-			{
-				path: "/login",
-				element: <Login />,
-			},
-			{
-				path: "/register",
-				element: <Register />,
-			},
-		],
-	},
-	{
-		path: "/dashboard",
-		element: (
-			<PrivateRoute>
-				<Dashboard />
-			</PrivateRoute>
-		),
-		children: [
-			{
-				path: "/dashboard",
-				element: <DashboardHome />,
-			},
-			// Admin routes
-			{
-				path: "allUsers",
-				element: (
-					<AdminRoute>
-						<AllUsers />
-					</AdminRoute>
-				),
-			},
-			{
-				path: "addItem",
-				element: (
-					<AdminRoute>
-						<AddItem />
-					</AdminRoute>
-				),
-			},
-			{
-				path: "manageItems",
-				element: (
-					<AdminRoute>
-						<ManageItems />
-					</AdminRoute>
-				),
-			},
-			// User routes
-			{
-				path: "myCart",
-				element: <MyCart />,
-			},
-			{
-				path: "payment",
-				element: <Payment />,
-			},
-			{
-				path: "paymentHistory",
-				element: <PaymentHistory />,
-			},
-		],
-	},
+    {
+        path: "/",
+        element: <Layout />,
+        children: [
+            {
+                path: "/",
+                element: <Home />,
+            },
+            {
+                path: "/menu",
+                element: <Menu />,
+            },
+            {
+                path: "/shop",
+                element: <Shop />,
+            },
+            {
+                path: "/contact",
+                element: <ContactUs />,
+            },
+            {
+                path: "/login",
+                element: <Login />,
+            },
+            {
+                path: "/register",
+                element: <Register />,
+            },
+        ],
+    },
+    {
+        path: "/dashboard",
+        element: (
+            <PrivateRoute>
+                <Dashboard />
+            </PrivateRoute>
+        ),
+        children: [
+            {
+                path: "/dashboard",
+                element: <DashboardHome />,
+            },
+            // Admin routes
+            {
+                path: "allUsers",
+                element: (
+                    <AdminRoute>
+                        <AllUsers />
+                    </AdminRoute>
+                ),
+            },
+            {
+                path: "addItem",
+                element: (
+                    <AdminRoute>
+                        <AddItem />
+                    </AdminRoute>
+                ),
+            },
+            {
+                path: "manageItems",
+                element: (
+                    <AdminRoute>
+                        <ManageItems />
+                    </AdminRoute>
+                ),
+            },
+            // User routes
+            {
+                path: "myCart",
+                element: <MyCart />,
+            },
+            {
+                path: "payment",
+                element: <Payment />,
+            },
+            {
+                path: "paymentHistory",
+                element: <PaymentHistory />,
+            },
+        ],
+    },
 ]);

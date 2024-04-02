@@ -15,9 +15,7 @@ const NavBar = () => {
         const handleScroll = () => {
             const currentScrollPos = window.pageYOffset;
             setShowNavbar(
-                currentScrollPos < prevScrollPos ||
-                    currentScrollPos === 0 ||
-                    currentScrollPos < 50
+                currentScrollPos < prevScrollPos || currentScrollPos === 0
             );
             setPrevScrollPos(currentScrollPos);
         };
