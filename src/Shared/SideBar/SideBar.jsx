@@ -35,7 +35,7 @@ const SideBar = () => {
                     {isAdmin ? (
                         <>
                             <li>
-                                <NavLink to="/dashboard">
+                                <NavLink to="./">
                                     <AiFillHome /> Admin Home
                                 </NavLink>
                             </li>
@@ -63,7 +63,7 @@ const SideBar = () => {
                     ) : (
                         <>
                             <li>
-                                <NavLink to="/dashboard">
+                                <NavLink to="./">
                                     <AiFillHome /> User Home
                                 </NavLink>
                             </li>
